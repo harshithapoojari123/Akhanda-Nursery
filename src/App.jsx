@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import logoSrc from './assets/image.png';
 import { heroSlides, categories, plants } from './data/plants';
 
@@ -21,10 +21,47 @@ const HeroCard = ({ slide, variant }) => (
   </div>
 );
 
+const LoadingScreen = () => (
+  <div className="loading-screen" role="status" aria-live="polite" aria-busy="true">
+    <div className="loading-card">
+      <div className="loading-logo-wrap">
+        <img className="loading-logo" src={logoSrc} alt="Akhanda Nursery logo" />
+      </div>
+      <p className="loading-eyebrow">Akhanda Nursery</p>
+      <h1>Growing a fresh garden experience</h1>
+      <p className="loading-copy">
+        Preparing beautiful plants, bold flowers, and lush greenery for you.
+      </p>
+      <div className="loading-chips" aria-hidden="true">
+        <span>Fresh picks</span>
+        <span>Seasonal blooms</span>
+        <span>Garden ready</span>
+      </div>
+      <div className="loading-orbit" aria-hidden="true">
+        <span />
+        <span />
+        <span />
+      </div>
+      <div className="loading-progress" aria-hidden="true">
+        <span />
+      </div>
+    </div>
+  </div>
+);
+
 function App() {
   const [route, setRoute] = useState('home');
+  const [isLoading, setIsLoading] = useState(true);
   const [activeCategory, setActiveCategory] = useState(categories[0].name);
   const selectedCategory = categories.find((category) => category.name === activeCategory) ?? categories[0];
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      setIsLoading(false);
+    }, 2200);
+
+    return () => window.clearTimeout(timer);
+  }, []);
 
   const filteredPlants = useMemo(() => {
     const filterKey = selectedCategory.filter ?? selectedCategory.name;
@@ -52,6 +89,10 @@ function App() {
     setRoute('category');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  if (isLoading) {
+    return <LoadingScreen />;
+  }
 
   return (
     <div className="app-shell">

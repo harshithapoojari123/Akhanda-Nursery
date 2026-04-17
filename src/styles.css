@@ -18,6 +18,206 @@ body {
     linear-gradient(180deg, #f7fcf6 0%, #eaf3e4 100%);
 }
 
+.loading-screen {
+  position: relative;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(120, 193, 92, 0.28), transparent 22%),
+    radial-gradient(circle at 85% 30%, rgba(42, 120, 49, 0.26), transparent 24%),
+    radial-gradient(circle at 50% 100%, rgba(209, 240, 185, 0.12), transparent 28%),
+    linear-gradient(135deg, #0f2411 0%, #17391a 48%, #102012 100%);
+  color: #f3fff1;
+}
+
+.loading-screen::before,
+.loading-screen::after {
+  content: '';
+  position: absolute;
+  inset: auto;
+  width: 18rem;
+  height: 18rem;
+  border-radius: 50%;
+  filter: blur(10px);
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.loading-screen::before {
+  top: -5rem;
+  left: -4rem;
+  background: radial-gradient(circle, rgba(153, 227, 120, 0.65), transparent 62%);
+}
+
+.loading-screen::after {
+  right: -4rem;
+  bottom: -5rem;
+  background: radial-gradient(circle, rgba(94, 160, 97, 0.45), transparent 62%);
+}
+
+.loading-card {
+  position: relative;
+  z-index: 1;
+  width: min(560px, 100%);
+  padding: 2.6rem 2.2rem;
+  border-radius: 2rem;
+  background: linear-gradient(180deg, rgba(17, 35, 17, 0.72), rgba(10, 24, 11, 0.58));
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 30px 80px rgba(2, 10, 3, 0.38);
+  backdrop-filter: blur(16px);
+  text-align: center;
+}
+
+.loading-card::before {
+  content: '';
+  position: absolute;
+  inset: 1rem;
+  border-radius: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background:
+    radial-gradient(circle at 20% 20%, rgba(174, 235, 131, 0.08), transparent 22%),
+    radial-gradient(circle at 80% 30%, rgba(255, 255, 255, 0.05), transparent 18%);
+  pointer-events: none;
+}
+
+.loading-logo-wrap {
+  display: inline-grid;
+  place-items: center;
+  width: 6.2rem;
+  height: 6.2rem;
+  margin: 0 auto 1rem;
+  border-radius: 1.8rem;
+  background: linear-gradient(135deg, rgba(228, 247, 207, 0.9), rgba(180, 224, 147, 0.28));
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.2);
+}
+
+.loading-logo {
+  width: 4.2rem;
+  height: auto;
+  animation: loadingFloat 2.6s ease-in-out infinite;
+}
+
+.loading-eyebrow {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.34em;
+  font-size: 0.74rem;
+  color: #bde7a8;
+}
+
+.loading-card h1 {
+  margin: 0.75rem 0 0;
+  font-size: clamp(2rem, 3vw, 3.2rem);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  color: #f8fff6;
+}
+
+.loading-copy {
+  margin: 1rem auto 0;
+  max-width: 32rem;
+  color: rgba(239, 250, 235, 0.78);
+  font-size: 1.02rem;
+}
+
+.loading-chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-top: 1.3rem;
+}
+
+.loading-chips span {
+  padding: 0.5rem 0.85rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(230, 255, 214, 0.12);
+  color: rgba(243, 255, 241, 0.88);
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.loading-orbit {
+  display: flex;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-top: 1.6rem;
+}
+
+.loading-orbit span {
+  width: 0.9rem;
+  height: 0.9rem;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #dff5c7 0%, #8dd36a 100%);
+  box-shadow: 0 0 16px rgba(154, 225, 121, 0.38);
+  animation: loadingPulse 1.15s ease-in-out infinite;
+}
+
+.loading-orbit span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.loading-orbit span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.loading-progress {
+  width: min(18rem, 100%);
+  height: 0.45rem;
+  margin: 1.5rem auto 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+
+.loading-progress span {
+  display: block;
+  width: 40%;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, transparent 0%, #dff5c7 45%, #8dd36a 100%);
+  animation: loadingSweep 1.9s ease-in-out infinite;
+}
+
+@keyframes loadingFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes loadingPulse {
+  0%,
+  100% {
+    transform: translateY(0) scale(0.92);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(-7px) scale(1.12);
+    opacity: 1;
+  }
+}
+
+@keyframes loadingSweep {
+  0% {
+    transform: translateX(-120%);
+  }
+  50% {
+    transform: translateX(45%);
+  }
+  100% {
+    transform: translateX(220%);
+  }
+}
+
 a {
   color: inherit;
   text-decoration: none;
