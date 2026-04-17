@@ -435,6 +435,8 @@ button {
   border: 1px solid rgba(87, 135, 72, 0.14);
   box-shadow: 0 22px 48px rgba(37, 81, 34, 0.08);
   overflow: hidden;
+  content-visibility: auto;
+  contain-intrinsic-size: 760px;
 }
 
 .category-page-card img {
@@ -488,6 +490,8 @@ button {
   grid-template-columns: repeat(3, minmax(160px, 1fr));
   gap: 0.85rem;
   margin: 1.25rem 0 2rem;
+  content-visibility: auto;
+  contain-intrinsic-size: 900px;
 }
 
 .category-product-card {
@@ -588,8 +592,6 @@ button {
   min-height: 310px;
   border-radius: 2rem;
   overflow: hidden;
-  background-size: cover;
-  background-position: center;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
@@ -605,6 +607,14 @@ button {
 .hero-card.small,
 .hero-card.hero-small {
   min-height: 160px;
+}
+
+.hero-card-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .hero-card-overlay {
@@ -668,6 +678,8 @@ button {
   display: grid;
   gap: 1.75rem;
   grid-template-columns: 1.35fr 0.85fr;
+  content-visibility: auto;
+  contain-intrinsic-size: 900px;
 }
 
 .about-card-grid {
@@ -696,6 +708,8 @@ button {
 .categories-section {
   overflow: hidden;
   margin-top: 0.75rem;
+  content-visibility: auto;
+  contain-intrinsic-size: 620px;
 }
 
 .categories-section .section-header {
@@ -839,6 +853,8 @@ button {
 
 .contact-section {
   padding-bottom: 1rem;
+  content-visibility: auto;
+  contain-intrinsic-size: 720px;
 }
 
 .contact-grid {
@@ -1068,6 +1084,14 @@ button {
 
   .hero-copy-panel {
     padding: 1.8rem;
+  }
+
+  .hero-smalls {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-card.hero-small {
+    min-height: 150px;
   }
 
   .hero-actions {

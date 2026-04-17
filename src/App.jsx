@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import logoSrc from './assets/image.png';
+import logoSrc from './assets/image-optimized.png';
 import { heroSlides, categories, plants } from './data/plants';
 
 const whatsappNumber = '919948788149';
@@ -11,8 +11,16 @@ const Logo = ({ onClick }) => (
   </button>
 );
 
-const HeroCard = ({ slide, variant }) => (
-  <div className={`hero-card ${variant}`} style={{ backgroundImage: `url(${slide.image})` }}>
+const HeroCard = ({ slide, variant, priority = false }) => (
+  <div className={`hero-card ${variant}`}>
+      <img
+        className="hero-card-image"
+        src={slide.image}
+        alt={slide.title}
+        loading={priority ? 'eager' : 'lazy'}
+        fetchpriority={priority ? 'high' : 'auto'}
+        decoding="async"
+      />
     <div className="hero-card-overlay" />
     <div className="hero-card-copy">
       <span>{slide.title}</span>
@@ -52,13 +60,14 @@ const LoadingScreen = () => (
 function App() {
   const [route, setRoute] = useState('home');
   const [isLoading, setIsLoading] = useState(true);
+  const [isCompactViewport] = useState(() => window.innerWidth <= 768);
   const [activeCategory, setActiveCategory] = useState(categories[0].name);
   const selectedCategory = categories.find((category) => category.name === activeCategory) ?? categories[0];
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
       setIsLoading(false);
-    }, 2200);
+    }, 250);
 
     return () => window.clearTimeout(timer);
   }, []);
@@ -90,7 +99,7 @@ function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  if (isLoading) {
+  if (isLoading && !isCompactViewport) {
     return <LoadingScreen />;
   }
 
@@ -179,7 +188,7 @@ function App() {
               </div>
 
               <div className="hero-display-panel">
-                <HeroCard slide={heroSlides[0]} variant="hero-large" />
+                <HeroCard slide={heroSlides[0]} variant="hero-large" priority />
                 <div className="hero-smalls">
                   {heroSlides.slice(1).map((slide) => (
                     <HeroCard key={slide.title} slide={slide} variant="hero-small" />
@@ -234,7 +243,7 @@ function App() {
                     className={`category-pill ${category.name === activeCategory ? 'active' : ''}`}
                     onClick={() => openCategory(category.name)}
                   >
-                    <img src={category.image} alt={category.name} />
+                    <img src={category.image} alt={category.name} loading="lazy" decoding="async" />
                     <div>
                       <strong>{category.name}</strong>
                       <p>{category.description}</p>
@@ -290,7 +299,7 @@ function App() {
       ) : (
         <main className="section category-page">
           <div className="category-page-card">
-            <img src={selectedCategory.image} alt={selectedCategory.name} />
+            <img src={selectedCategory.image} alt={selectedCategory.name} loading="eager" decoding="async" />
             <div className="category-page-copy">
               <button className="back-link back-link--inline" type="button" onClick={backToCategories}>
                 ← Back to categories
@@ -314,7 +323,7 @@ function App() {
           <div className="category-product-grid">
             {filteredPlants.map((plant) => (
               <article key={plant.id} className="category-product-card">
-                <img src={plant.image} alt={plant.name} />
+                <img src={plant.image} alt={plant.name} loading="lazy" decoding="async" />
                 <div className="category-product-body">
                   <h3>{plant.name}</h3>
                   <p>{plant.description}</p>
