@@ -226,7 +226,9 @@ function App() {
                 <h1>Jai Kissan... Jai Jawan 🌿</h1>
                 <p className="hero-text">
                   Discover a beautiful range of indoor, outdoor, medicinal, and exotic plants curated for every
-                  gardener. Bring home fresh greenery with expert care, vibrant blooms, and nature-inspired design.
+                  gardener. If you are looking for a nursery in Visakhapatnam, a fruit plants nursery, or a plant
+                  nursery near me, Akhanda Nursery is ready with fresh greenery, expert care, vibrant blooms, and
+                  nature-inspired design.
                 </p>
                 <div className="hero-actions">
                   <a
@@ -277,7 +279,8 @@ function App() {
                 <span className="eyebrow">Established 2021</span>
                 <h2>About Akhanda Nursery</h2>
                 <p>
-                  Akhanda Nursery is a trusted fruit plant nursery located at Flat #106, Lotus Venture, Gokulam Apartment, Beside B-Zone Park, Sujatha Nagar, VISAKHAPATNAM - 230 051.
+                  Akhanda Nursery is a trusted nursery in Visakhapatnam and fruit plants nursery located at Flat #106,
+                  Lotus Venture, Gokulam Apartment, Beside B-Zone Park, Sujatha Nagar, VISAKHAPATNAM - 230 051.
                   We specialize in fruit-bearing plants, exotic varieties, flowers, and medicinal plants.
                 </p>
                 <p>
