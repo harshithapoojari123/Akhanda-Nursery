@@ -62,6 +62,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [isCompactViewport] = useState(() => window.innerWidth <= 768);
   const [activeCategory, setActiveCategory] = useState(categories[0].name);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const selectedCategory = categories.find((category) => category.name === activeCategory) ?? categories[0];
 
   useEffect(() => {
@@ -71,6 +72,28 @@ function App() {
 
     return () => window.clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    if (!isMenuOpen) {
+      document.body.style.overflow = '';
+      return undefined;
+    }
+
+    document.body.style.overflow = 'hidden';
+
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        setIsMenuOpen(false);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isMenuOpen]);
 
   const filteredPlants = useMemo(() => {
     const filterKey = selectedCategory.filter ?? selectedCategory.name;
@@ -85,7 +108,25 @@ function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
+  const openHomeView = () => {
+    closeMenu();
+    goHome();
+  };
+
+  const scrollToSection = (sectionId) => {
+    closeMenu();
+    goHome();
+    window.setTimeout(() => {
+      document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+    }, 0);
+  };
+
   const backToCategories = () => {
+    closeMenu();
     setRoute('home');
     window.scrollTo({ top: 0, behavior: 'smooth' });
     setTimeout(() => {
@@ -94,6 +135,7 @@ function App() {
   };
 
   const openCategory = (categoryName) => {
+    closeMenu();
     setActiveCategory(categoryName);
     setRoute('category');
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -106,42 +148,65 @@ function App() {
   return (
     <div className="app-shell">
       <header className="site-header">
-        <Logo onClick={goHome} />
-        <nav className="top-nav">
-          <button className="nav-link" type="button" onClick={goHome}>
+        <Logo onClick={openHomeView} />
+        <button
+          className={`mobile-menu-button ${isMenuOpen ? 'open' : ''}`}
+          type="button"
+          aria-label="Toggle navigation menu"
+          aria-expanded={isMenuOpen}
+          aria-controls="mobile-nav-panel"
+          onClick={() => setIsMenuOpen((value) => !value)}
+        >
+          <span />
+          <span />
+          <span />
+        </button>
+        <nav className="top-nav desktop-nav">
+          <button className="nav-link" type="button" onClick={openHomeView}>
             Home
           </button>
           <button
             className="nav-link"
             type="button"
-            onClick={() => {
-              goHome();
-              document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
-            }}
+            onClick={() => scrollToSection('about')}
           >
             About
           </button>
           <button
             className="nav-link"
             type="button"
-            onClick={() => {
-              goHome();
-              document.getElementById('categories')?.scrollIntoView({ behavior: 'smooth' });
-            }}
+            onClick={() => scrollToSection('categories')}
           >
             Categories
           </button>
           <button
             className="nav-link"
             type="button"
-            onClick={() => {
-              goHome();
-              document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-            }}
+            onClick={() => scrollToSection('contact')}
           >
             Contact
           </button>
         </nav>
+        <button
+          className={`mobile-nav-backdrop ${isMenuOpen ? 'open' : ''}`}
+          type="button"
+          aria-label="Close navigation menu"
+          onClick={closeMenu}
+        />
+        <div id="mobile-nav-panel" className={`mobile-nav-panel ${isMenuOpen ? 'open' : ''}`}>
+          <button className="mobile-nav-link" type="button" onClick={openHomeView}>
+            Home
+          </button>
+          <button className="mobile-nav-link" type="button" onClick={() => scrollToSection('about')}>
+            About
+          </button>
+          <button className="mobile-nav-link" type="button" onClick={() => scrollToSection('categories')}>
+            Categories
+          </button>
+          <button className="mobile-nav-link" type="button" onClick={() => scrollToSection('contact')}>
+            Contact
+          </button>
+        </div>
       </header>
 
       {route === 'home' ? (

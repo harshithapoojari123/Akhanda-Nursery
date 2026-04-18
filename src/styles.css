@@ -239,6 +239,7 @@ button {
   justify-content: space-between;
   gap: 1rem;
   padding: 1.5rem 0 0;
+  position: relative;
 }
 
 .logo-badge {
@@ -289,6 +290,10 @@ button {
   flex-wrap: wrap;
 }
 
+.desktop-nav {
+  display: flex;
+}
+
 .top-nav .nav-link {
   background: rgba(255, 255, 255, 0.88);
   border: 1px solid rgba(70, 110, 56, 0.14);
@@ -304,6 +309,67 @@ button {
   background: rgba(51, 112, 40, 0.12);
   border-color: rgba(46, 111, 44, 0.3);
   transform: translateY(-1px);
+}
+
+.mobile-menu-button {
+  display: none;
+  width: 3.2rem;
+  height: 3.2rem;
+  border: 1px solid rgba(70, 110, 56, 0.16);
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 0.65rem;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  gap: 0.22rem;
+  flex-direction: column;
+  box-shadow: 0 10px 24px rgba(43, 101, 46, 0.08);
+}
+
+.mobile-menu-button span {
+  width: 1.2rem;
+  height: 0.14rem;
+  border-radius: 999px;
+  background: #2f5f2d;
+  transition: transform 0.25s ease, opacity 0.25s ease, width 0.25s ease;
+}
+
+.mobile-menu-button.open span:nth-child(1) {
+  transform: translateY(0.36rem) rotate(45deg);
+}
+
+.mobile-menu-button.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile-menu-button.open span:nth-child(3) {
+  transform: translateY(-0.36rem) rotate(-45deg);
+}
+
+.mobile-nav-panel {
+  display: none;
+}
+
+.mobile-nav-backdrop {
+  display: none;
+}
+
+.mobile-nav-link {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: #234f22;
+  font-weight: 700;
+  text-align: left;
+  padding: 0.9rem 1rem;
+  border-radius: 0.95rem;
+  cursor: pointer;
+}
+
+.mobile-nav-link:hover,
+.mobile-nav-link:focus-visible {
+  background: rgba(47, 122, 47, 0.08);
 }
 
 .hero-section {
@@ -1069,13 +1135,73 @@ button {
 
 @media (max-width: 720px) {
   .site-header {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    margin: 0 -1rem;
+    padding: 1rem 1rem 0.85rem;
+    background: rgba(239, 247, 235, 0.82);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(92, 133, 76, 0.1);
   }
 
-  .top-nav {
-    width: 100%;
-    justify-content: space-between;
+  .desktop-nav {
+    display: none;
+  }
+
+  .mobile-menu-button {
+    display: inline-flex;
+  }
+
+  .mobile-nav-panel {
+    display: grid;
+    gap: 0.35rem;
+    position: absolute;
+    top: calc(100% + 0.9rem);
+    left: 0;
+    right: 0;
+    padding: 0.85rem;
+    border-radius: 1.35rem;
+    background: rgba(255, 255, 255, 0.96);
+    border: 1px solid rgba(84, 126, 73, 0.14);
+    box-shadow: 0 24px 60px rgba(36, 81, 34, 0.18);
+    backdrop-filter: blur(18px);
+    z-index: 20;
+    opacity: 0;
+    transform: translateY(-8px);
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .mobile-nav-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    border: 0;
+    padding: 0;
+    background: rgba(13, 26, 14, 0.26);
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    z-index: 25;
+  }
+
+  .mobile-nav-panel.open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .mobile-nav-backdrop.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .site-header .logo-image {
+    width: 72px;
   }
 
   .hero-card.hero-large {
@@ -1084,6 +1210,30 @@ button {
 
   .hero-copy-panel {
     padding: 1.8rem;
+  }
+
+  .hero-grid {
+    gap: 1.1rem;
+  }
+
+  .hero-section {
+    margin-top: 0.75rem;
+  }
+
+  .hero-copy-panel h1 {
+    font-size: clamp(2.3rem, 9vw, 3.1rem);
+  }
+
+  .hero-text {
+    font-size: 1rem;
+  }
+
+  .hero-stats {
+    gap: 0.75rem;
+  }
+
+  .hero-stats div {
+    padding: 0.9rem 0.95rem;
   }
 
   .hero-smalls {
@@ -1122,5 +1272,21 @@ button {
 
   .button {
     width: 100%;
+  }
+
+  .button.button-sm {
+    width: auto;
+  }
+
+  .category-pill {
+    min-height: 5.3rem;
+  }
+
+  .contact-grid {
+    gap: 1rem;
+  }
+
+  .map-frame {
+    min-height: 260px;
   }
 }
