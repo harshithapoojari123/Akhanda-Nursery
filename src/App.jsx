@@ -60,9 +60,9 @@ const LoadingScreen = () => (
 function App() {
   const [route, setRoute] = useState('home');
   const [isLoading, setIsLoading] = useState(true);
-  const [isCompactViewport] = useState(() => window.innerWidth <= 768);
   const [activeCategory, setActiveCategory] = useState(categories[0].name);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMapReady, setIsMapReady] = useState(false);
   const selectedCategory = categories.find((category) => category.name === activeCategory) ?? categories[0];
 
   useEffect(() => {
@@ -94,6 +94,14 @@ function App() {
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, [isMenuOpen]);
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      setIsMapReady(true);
+    }, 1800);
+
+    return () => window.clearTimeout(timer);
+  }, []);
 
   const filteredPlants = useMemo(() => {
     const filterKey = selectedCategory.filter ?? selectedCategory.name;
@@ -141,7 +149,7 @@ function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  if (isLoading && !isCompactViewport) {
+  if (isLoading) {
     return <LoadingScreen />;
   }
 
@@ -350,12 +358,24 @@ function App() {
                   </div>
                 </div>
                 <div className="map-frame">
-                  <iframe
-                    title="Akhanda Nursery location"
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3798.786670410907!2d83.21289771895933!3d17.80172039140989!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a3967ee347a5a8f%3A0xd5e59c27dd54d9aa!2sGokulam%20Apartment!5e0!3m2!1sen!2sin!4v1776394516131!5m2!1sen!2sin" 
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                  />
+                  {isMapReady ? (
+                    <iframe
+                      title="Akhanda Nursery location"
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3798.786670410907!2d83.21289771895933!3d17.80172039140989!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a3967ee347a5a8f%3A0xd5e59c27dd54d9aa!2sGokulam%20Apartment!5e0!3m2!1sen!2sin!4v1776394516131!5m2!1sen!2sin"
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                    />
+                  ) : (
+                    <button
+                      className="map-placeholder"
+                      type="button"
+                      onClick={() => setIsMapReady(true)}
+                    >
+                      <span className="eyebrow">Location</span>
+                      <strong>Tap to load map</strong>
+                      <p>We keep the map paused at first so the page opens faster on mobile.</p>
+                    </button>
+                  )}
                 </div>
               </div>
             </section>

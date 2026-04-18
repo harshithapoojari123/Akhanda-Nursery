@@ -43,12 +43,12 @@ export const heroSlides = [
   {
     title: 'Breathe life into your garden',
     subtitle: 'Fruit plants, indoor greens, and exotic botanicals',
-    image: heroOneImage,
+    image: heroTwoImage,
   },
   {
     title: 'Premium indoor greenery',
     subtitle: 'Stylish foliage to brighten every space',
-    image: heroTwoImage,
+    image: heroOneImage,
   },
   {
     title: 'Garden-ready outdoor picks',
