@@ -399,24 +399,30 @@ button {
   color: #5a7e52;
 }
 
-.hero-brand {
+.hero-brand,
+.hero-slogan {
   display: block;
-  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  font-size: clamp(2.35rem, 4vw, 3.45rem);
   font-weight: 900;
-  letter-spacing: 0.08em;
-  line-height: 1.1;
-  color: #214c20;
-  margin-bottom: 0.35rem;
+  letter-spacing: -0.05em;
+  line-height: 1.02;
+  color: #144116;
+  margin: 0;
   text-transform: uppercase;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.55), 0 8px 24px rgba(31, 78, 29, 0.12);
+  text-shadow: none;
+}
+
+.hero-slogan {
+  font-size: clamp(1.15rem, 2.2vw, 1.6rem);
+  letter-spacing: 0.1em;
+  color: #4f6c49;
+  font-weight: 700;
+  text-transform: uppercase;
+  opacity: 0.9;
 }
 
 .hero-copy-panel h1 {
-  margin: 0;
-  font-size: clamp(2.8rem, 4vw, 4.4rem);
-  line-height: 1.03;
-  letter-spacing: -0.05em;
-  color: #144116;
+  margin-top: 0.1rem;
 }
 
 .hero-text {

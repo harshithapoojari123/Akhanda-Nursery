@@ -222,8 +222,8 @@ function App() {
           <section className="hero-section">
             <div className="hero-grid">
               <div className="hero-copy-panel">
-                <strong className="eyebrow hero-brand">Akhanda Nursery</strong>
-                <h1>Jai Kissan... Jai Jawan 🌿</h1>
+                <div className="hero-brand">Akhanda Nursery</div>
+                <h1 className="hero-slogan">Jai Kissan... Jai Jawan 🌿</h1>
                 <p className="hero-text">
                   Discover a beautiful range of indoor, outdoor, medicinal, and exotic plants curated for every
                   gardener. If you are looking for a nursery in Visakhapatnam, a fruit plants nursery, or a plant
