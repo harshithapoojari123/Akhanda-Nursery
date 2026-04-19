@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import logoSrc from './assets/image-optimized.png';
+import logoSrc from './assets/image.png';
 import { heroSlides, categories, plants } from './data/plants';
 
 const whatsappNumber = '919948788149';
@@ -222,7 +222,7 @@ function App() {
           <section className="hero-section">
             <div className="hero-grid">
               <div className="hero-copy-panel">
-                <span className="eyebrow">Akhanda Nursery</span>
+                <strong className="eyebrow hero-brand">Akhanda Nursery</strong>
                 <h1>Jai Kissan... Jai Jawan 🌿</h1>
                 <p className="hero-text">
                   Discover a beautiful range of indoor, outdoor, medicinal, and exotic plants curated for every
@@ -276,8 +276,15 @@ function App() {
           <main>
             <section id="about" className="section about-section">
               <div className="section-copy">
-                <span className="eyebrow">Established 2021</span>
+                <span className="eyebrow">Established 2007</span>
                 <h2>About Akhanda Nursery</h2>
+                <div className="about-brand-card">
+                  <img className="about-brand-image" src={logoSrc} alt="Akhanda Nursery logo" />
+                  <div>
+                    <strong>Akhanda Nursery</strong>
+                    <p>Trusted nursery in Visakhapatnam with fruit plants, flowers, medicinal plants, and more.</p>
+                  </div>
+                </div>
                 <p>
                   Akhanda Nursery is a trusted nursery in Visakhapatnam and fruit plants nursery located at Flat #106,
                   Lotus Venture, Gokulam Apartment, Beside B-Zone Park, Sujatha Nagar, VISAKHAPATNAM - 230 051.

@@ -86,8 +86,8 @@ body {
 .loading-logo-wrap {
   display: inline-grid;
   place-items: center;
-  width: 6.2rem;
-  height: 6.2rem;
+  width: 7rem;
+  height: 7rem;
   margin: 0 auto 1rem;
   border-radius: 1.8rem;
   background: linear-gradient(135deg, rgba(228, 247, 207, 0.9), rgba(180, 224, 147, 0.28));
@@ -95,7 +95,7 @@ body {
 }
 
 .loading-logo {
-  width: 4.2rem;
+  width: 4.9rem;
   height: auto;
   animation: loadingFloat 2.6s ease-in-out infinite;
 }
@@ -258,7 +258,7 @@ button {
 }
 
 .logo-image {
-  width: 80px;
+  width: 116px;
   height: auto;
 }
 
@@ -274,7 +274,7 @@ button {
 
 .logo-badge strong {
   display: block;
-  font-size: 1.25rem;
+  font-size: 1.32rem;
 }
 
 .logo-badge span {
@@ -397,6 +397,18 @@ button {
   letter-spacing: 0.32em;
   font-size: 0.75rem;
   color: #5a7e52;
+}
+
+.hero-brand {
+  display: block;
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  line-height: 1.1;
+  color: #214c20;
+  margin-bottom: 0.35rem;
+  text-transform: uppercase;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.55), 0 8px 24px rgba(31, 78, 29, 0.12);
 }
 
 .hero-copy-panel h1 {
@@ -746,6 +758,40 @@ button {
   grid-template-columns: 1.35fr 0.85fr;
   content-visibility: auto;
   contain-intrinsic-size: 900px;
+}
+
+.about-brand-card {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem;
+  align-items: center;
+  margin: 1.2rem 0 1.4rem;
+  padding: 1rem 1.05rem;
+  border-radius: 1.5rem;
+  background: linear-gradient(135deg, rgba(240, 248, 235, 0.98), rgba(225, 240, 213, 0.96));
+  border: 1px solid rgba(58, 111, 51, 0.12);
+  box-shadow: 0 14px 28px rgba(46, 94, 40, 0.08);
+}
+
+.about-brand-image {
+  width: 92px;
+  height: auto;
+  border-radius: 1.2rem;
+  background: #fff;
+  box-shadow: 0 10px 20px rgba(32, 74, 27, 0.12);
+}
+
+.about-brand-card strong {
+  display: block;
+  margin-bottom: 0.35rem;
+  color: #1f4620;
+  font-size: 1.08rem;
+}
+
+.about-brand-card p {
+  margin: 0;
+  color: #58714d;
+  line-height: 1.55;
 }
 
 .about-card-grid {
@@ -1241,7 +1287,16 @@ button {
   }
 
   .site-header .logo-image {
-    width: 72px;
+    width: 98px;
+  }
+
+  .about-brand-card {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .about-brand-image {
+    justify-self: center;
   }
 
   .hero-card.hero-large {
